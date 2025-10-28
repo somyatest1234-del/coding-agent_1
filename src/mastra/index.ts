@@ -7,7 +7,7 @@ import { cdataMcp } from "./mcp"; // optional if you added CData MCP integration
 // Use a different internal variable name to avoid conflicts
 const mastraApp = new Mastra({
   agents: { codingAgent },
-  mcpServers: [cdataMcp], // remove this line if not using MCP
+  //mcpServers: [cdataMcp], // remove this line if not using MCP
   storage: new LibSQLStore({ url: "file:../../mastra.db" })
 });
 
