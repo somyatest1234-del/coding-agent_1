@@ -6,6 +6,6 @@ export const cdataMcp = new MCPServer({
   url: "https://mcp.cloud.cdata.com/mcp",
   headers: {
     Authorization:
-      "Basic c29teWFzQGNkYXRhLmNvbTpCSEx6V01qcWM4c1U2TXl4WU9CZ0s5TWVyd0svWmdlN1BPcWVSZTNtODBDTjMveng=",
+      "Authorization": "Basic <base64-encoded somyas@cdata.com:BHLzWMjqc8sU6MyxYOBgK9MerwK/Zge7POqeRe3m80CN3/zx>",
   },
 });
