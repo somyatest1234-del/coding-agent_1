@@ -8,8 +8,7 @@ import { cdataMcp } from "./mcp"; // optional if you added CData MCP integration
 const mastraApp = new Mastra({
   agents: { codingAgent },
   mcpServers: [cdataMcp], // remove this line if not using MCP
-  storage: new LibSQLStore({ url: "file:../../mastra.db" }),
-  logger: new PinoLogger(),
+  storage: new LibSQLStore({ url: "file:../../mastra.db" })
 });
 
 // 👇 This line satisfies Mastra Cloud’s analyzer
