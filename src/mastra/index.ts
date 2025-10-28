@@ -3,6 +3,14 @@ import { LibSQLStore } from '@mastra/libsql';
 import { PinoLogger } from '@mastra/loggers';
 import { codingAgent } from './agents/coding-agent';
 import "dotenv/config";
+import { mastra } from "@mastra/core";
+import { cdataMcp } from "./mcp";
+
+export const app = mastra({
+  name: "Demo",
+  mcpServers: [cdataMcp],
+});
+
 
 export const mastra = new Mastra({
   agents: { codingAgent },
