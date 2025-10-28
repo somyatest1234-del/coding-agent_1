@@ -6,6 +6,20 @@ import "dotenv/config";
 
 export const mastra = new Mastra({
   agents: { codingAgent },
+  mcpServers: {
+    cdata: {
+      type: "http",
+      url: new URL(process.env.CDATA_MCP_URL!),
+      headers: {
+        Authorization:
+          "Basic " +
+          Buffer.from(
+            `${process.env.CDATA_USERNAME}:${process.env.CDATA_PAT}`
+          ).toString("base64"),
+      },
+    },
+  },
+})
   storage: new LibSQLStore({ url: 'file:../../mastra.db' }),
   logger: new PinoLogger({
     name: 'Mastra',
