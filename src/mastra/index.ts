@@ -1,26 +1,12 @@
-import { LibSQLStore } from '@mastra/libsql';
-import { PinoLogger } from '@mastra/loggers';
-import { codingAgent } from './agents/coding-agent';
-import "dotenv/config";
-import { mastra } from "@mastra/core";
-import { cdataMcp } from "./mcp";
+import { Mastra } from "@mastra/core";
+import { codingAgent } from "./agents/coding-agent";
+import { LibSQLStore } from "@mastra/libsql";
+import { PinoLogger } from "@mastra/logger";
+import { cdataMcp } from "./mcp"; // if you added MCP integration
 
-export const app = mastra({
-  name: "Demo",
-  mcpServers: [cdataMcp],
-});
-
-
-export const mastra = new Mastra({
+export const mastraApp = new Mastra({
   agents: { codingAgent },
-  storage: new LibSQLStore({ url: 'file:../../mastra.db' }),
-  logger: new PinoLogger({
-    name: 'Mastra',
-    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-  }),
-  observability: {
-    default: {
-      enabled: true,
-    },
-  },
+  mcpServers: [cdataMcp], // optional if you’re registering MCP
+  storage: new LibSQLStore({ url: "file:../../mastra.db" }),
+  logger: new PinoLogger(),
 });
