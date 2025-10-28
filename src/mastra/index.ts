@@ -1,15 +1,14 @@
 import { Mastra } from "@mastra/core";
 import { codingAgent } from "./agents/coding-agent";
 import { LibSQLStore } from "@mastra/libsql";
-import { PinoLogger } from "@mastra/logger";
-import { cdataMcp } from "./mcp"; // optional if you added CData MCP integration
+import { cdataMcp } from "./mcp";
 
-// Use a different internal variable name to avoid conflicts
 const mastraApp = new Mastra({
   agents: { codingAgent },
-  //mcpServers: [cdataMcp], // remove this line if not using MCP
-  storage: new LibSQLStore({ url: "file:../../mastra.db" })
+  storage: new LibSQLStore({ url: "file:../../mastra.db" }),
 });
 
-// 👇 This line satisfies Mastra Cloud’s analyzer
+// ✅ register MCP after startup
+mastraApp.addMCPServer(cdataMcp);
+
 export { mastraApp as mastra };
