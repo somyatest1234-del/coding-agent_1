@@ -1,15 +1,26 @@
-import { Mastra } from '@mastra/core/mastra';
-import { LibSQLStore } from '@mastra/libsql';
-import { PinoLogger } from '@mastra/loggers';
-import { codingAgent } from './agents/coding-agent';
 import "dotenv/config";
+import { Mastra } from "@mastra/core";
+import { codingAgent } from "./agents/coding-agent";
+
+/**
+ * Mastra App Configuration
+ *
+ * This file registers your agents and MCP servers with the Mastra runtime.
+ * After redeploying, your Mastra Cloud Studio will automatically detect
+ * both the Coding Agent and the connected CData MCP Server.
+ */
 
 export const mastra = new Mastra({
-  agents: { codingAgent },
+  // 🧠 Register your agents here
+  agents: {
+    codingAgent,
+  },
+
+  // 🌐 Register external MCP servers here
   mcpServers: {
     cdata: {
       type: "http",
-      url: new URL(process.env.CDATA_MCP_URL!),
+      url: new URL(process.env.CDATA_MCP_URL ?? ""),
       headers: {
         Authorization:
           "Basic " +
@@ -17,17 +28,6 @@ export const mastra = new Mastra({
             `${process.env.CDATA_USERNAME}:${process.env.CDATA_PAT}`
           ).toString("base64"),
       },
-    },
-  },
-})
-  storage: new LibSQLStore({ url: 'file:../../mastra.db' }),
-  logger: new PinoLogger({
-    name: 'Mastra',
-    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-  }),
-  observability: {
-    default: {
-      enabled: true,
     },
   },
 });
