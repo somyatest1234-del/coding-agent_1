@@ -2,6 +2,7 @@ import { Mastra } from '@mastra/core/mastra';
 import { LibSQLStore } from '@mastra/libsql';
 import { PinoLogger } from '@mastra/loggers';
 import { codingAgent } from './agents/coding-agent';
+import "dotenv/config";
 
 export const mastra = new Mastra({
   agents: { codingAgent },
